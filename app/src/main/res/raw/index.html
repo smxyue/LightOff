@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>灭灯 Lights Out · 亮灯翻转谜题</title>
+<meta name="description" content="n×n 棋盘亮灯翻转谜题：点击格子翻转它和上下左右相邻格，全部熄灭即获胜。支持自定义规模与亮灯比例、按规模统计胜利次数。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1220'/%3E%3Crect x='4' y='4' width='10' height='10' rx='2.5' fill='%23ffd166'/%3E%3Crect x='18' y='4' width='10' height='10' rx='2.5' fill='%23243049'/%3E%3Crect x='4' y='18' width='10' height='10' rx='2.5' fill='%23243049'/%3E%3Crect x='18' y='18' width='10' height='10' rx='2.5' fill='%23ffd166'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>灭灯<span class="en">Lights&nbsp;Out</span></h1>
+      <p class="tagline">点击一格 → 该格与上下左右（不含对角）同时翻转 · 全部熄灭即获胜</p>
+    </div>
+    <div class="hero">
+      <div class="hero-item"><b id="statTotalWins">0</b><span>累计胜利</span></div>
+      <div class="hero-item"><b id="statSizeWins">0</b><span id="statSizeWinsLabel">8×8 胜利</span></div>
+      <div class="hero-item"><b id="statSizePar">–</b><span>本局最少步数</span></div>
+      <div class="hero-item"><b id="statSizeBest">–</b><span id="statSizeBestLabel">8×8 最佳</span></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 棋盘 -->
+    <section class="panel board-panel">
+      <div class="chips" id="statusbar">
+        <span class="chip">规模 <b id="chipSize">8×8</b></span>
+        <span class="chip">亮灯 <b id="chipLit">0</b></span>
+        <span class="chip">步数 <b id="chipSteps">0</b></span>
+        <span class="chip chip-par">最少 <b id="chipPar">–</b></span>
+        <span class="chip">用时 <b id="chipTime">00:00</b></span>
+        <span class="chip chip-flag hidden" id="chipAssist">已用提示</span>
+        <span class="chip chip-flag hidden" id="chipMode">编辑中</span>
+      </div>
+
+      <div class="board-wrap" id="boardWrap">
+        <div class="board" id="board" role="grid" aria-label="灭灯棋盘"></div>
+        <canvas id="fx" class="fx"></canvas>
+        <div class="overlay hidden" id="winOverlay">
+          <div class="win-card">
+            <div class="win-emoji" id="winEmoji">🎉</div>
+            <h2 id="winTitle">全部熄灭！</h2>
+            <p id="winLine">用时 00:12 · 步数 19 / 最少可以做到 19 步</p>
+            <div class="win-actions">
+              <button class="btn primary" id="btnNextRound">再来一局</button>
+              <button class="btn ghost" id="btnCloseWin">看看棋盘</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar main-actions">
+        <button class="btn primary" id="btnNew">新游戏</button>
+        <button class="btn" id="btnUndo" disabled>撤销</button>
+        <button class="btn" id="btnHint">提示</button>
+        <button class="btn" id="btnAuto">自动求解</button>
+        <button class="btn" id="btnShuffle" title="在保留步数的情况下重新打乱灯态（保证可解）">洗牌</button>
+        <button class="btn" id="btnSound" title="音效开关">🔊</button>
+      </div>
+
+      <div class="toolbar edit-actions">
+        <button class="btn" id="btnEditToggle">编辑棋盘</button>
+        <button class="btn" id="btnEditorRandom">随机填充</button>
+        <button class="btn" id="btnEditorClear">全部熄灭</button>
+        <button class="btn primary hidden" id="btnStartCustom">开始挑战</button>
+        <span class="chip chip-solvable" id="chipSolvable">布局可解 ✓</span>
+      </div>
+
+      <p class="hint-text" id="explain">
+        每一格只需按 0 或 1 次（按两次等于没按），所以任何局面都存在“最少步数”最优解。想验证可用「自动求解」。
+      </p>
+    </section>
+
+    <!-- 右侧：设置 + 统计 -->
+    <aside class="side">
+      <section class="panel">
+        <h2>对局设置</h2>
+        <label class="field">
+          <span>棋盘规模 N <em class="val" id="valN">8</em></span>
+          <div class="row">
+            <input type="range" id="inN" min="2" max="24" step="1" value="8" />
+            <input type="number" id="inNCustom" min="2" max="24" step="1" value="8" title="自定义规模（2-24）" aria-label="自定义棋盘规模" />
+          </div>
+          <div class="row presets">
+            <button class="mini" data-n="3">3×3</button>
+            <button class="mini" data-n="5">5×5</button>
+            <button class="mini" data-n="6">6×6</button>
+            <button class="mini" data-n="8">8×8</button>
+            <button class="mini" data-n="10">10×10</button>
+            <button class="mini" data-n="12">12×12</button>
+            <button class="mini" data-n="16">16×16</button>
+            <button class="mini" data-n="20">20×20</button>
+            <button class="mini" data-n="24">24×24</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>初始亮灯比例 <em class="val" id="valRatio">10%</em></span>
+          <input type="range" id="inRatio" min="1" max="60" step="1" value="10" />
+          <div class="row presets">
+            <button class="mini" data-r="5">5%</button>
+            <button class="mini" data-r="10">10%</button>
+            <button class="mini" data-r="20">20%</button>
+            <button class="mini" data-r="30">30%</button>
+            <button class="mini" data-r="50">50%</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>自动求解速度 <em class="val" id="valSpeed">220ms/步</em></span>
+          <input type="range" id="inSpeed" min="40" max="1000" step="20" value="220" />
+          <div class="row presets">
+            <button class="mini" data-s="40" title="每步 40ms">极速</button>
+            <button class="mini" data-s="120" title="每步 120ms">快速</button>
+            <button class="mini" data-s="260" title="每步 260ms">中速</button>
+            <button class="mini" data-s="600" title="每步 600ms">慢速</button>
+            <button class="mini" data-s="1000" title="每步 1s">演示</button>
+          </div>
+        </label>
+        <label class="field checkbox">
+          <input type="checkbox" id="inCountTarget" checked />
+          <span>把“初始亮灯比例”当目标（不足时自动补灯以保证局面可解）</span>
+        </label>
+        <p class="note" id="solvNote"></p>
+      </section>
+
+      <section class="panel">
+        <h2>按规模统计 <small id="statScope"></small></h2>
+        <div class="table-wrap">
+          <table class="stats">
+            <thead>
+              <tr>
+                <th>规模</th><th>胜利</th><th>局数</th><th>胜率</th><th>最少步</th><th>最快</th><th>均步</th>
+              </tr>
+            </thead>
+            <tbody id="statsBody"></tbody>
+            <tfoot>
+              <tr><td>合计</td><td id="fWins">0</td><td id="fGames">0</td><td id="fRate">–</td><td id="fBest">–</td><td id="fFast">–</td><td id="fAvg">–</td></tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="toolbar">
+          <button class="mini" id="btnExportCsv">导出 CSV</button>
+          <button class="mini" id="btnExportJson">备份记录</button>
+          <button class="mini" id="btnImportJson">恢复记录</button>
+          <button class="mini danger" id="btnClearSize">清除本规模</button>
+          <button class="mini danger" id="btnClearAll">清除全部</button>
+          <input type="file" id="fileImport" accept=".json,application/json" hidden />
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>玩法说明</h2>
+        <ul class="rules">
+          <li>点击/触摸一格：该格与<b>上下左右</b>四邻同时翻转（对角不受影响）。</li>
+          <li>把<b>所有灯熄灭</b>即胜利，计时从第一次点击开始。</li>
+          <li>棋盘规模 2–24 可自定义（滑杆或直接输入数字）；「自动求解速度」40ms–1s 可调，调慢可以看清每一步。</li>
+          <li>默认每局都由随机按键打乱生成，<b>数学上保证可解</b>；提示与自动求解会把本局标记为「已协助」，不计入胜利次数。</li>
+          <li>「编辑棋盘」可自己摆灯，系统会实时判定是否有解。</li>
+          <li>键盘：方向键移动焦点，<kbd>空格</kbd>/<kbd>Enter</kbd> 点击，<kbd>Z</kbd> 撤销，<kbd>N</kbd> 新局，<kbd>H</kbd> 提示。</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>纯 HTML + CSS + JavaScript · 无依赖 · 统计保存在浏览器本地</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="solver.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
