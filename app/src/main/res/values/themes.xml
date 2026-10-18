@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.LightOff" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorOnPrimary">#FF08130F</item>
+        <item name="colorSecondary">@color/teal</item>
+        <item name="colorOnSecondary">#FF08130F</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/ink_dim</item>
+        <item name="android:colorBackground">@color/bg</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+    </style>
+
+    <!-- 主按钮：填充（新游戏 / 开始挑战）。注意：layout_* 属性不会从 style 生效，尺寸/权重/边距一律写在布局 XML 里 -->
+    <style name="WgtButtonPrimary" parent="Widget.Material3.Button">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/ink_on_primary</item>
+        <item name="backgroundTint">@color/amber</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+    </style>
+
+    <!-- 次按钮：描边 -->
+    <style name="WgtButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="strokeColor">@color/btn_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <!-- 统计卡片单元 -->
+    <style name="StatCell">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/bg_stat_cell</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="StatValue">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/amber</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="StatLabel">
+        <item name="android:textSize">10.5sp</item>
+        <item name="android:textColor">@color/ink_faint</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <!-- 设置弹层标题 -->
+    <style name="SheetTitle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="SheetSection">
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="SheetLabel">
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">@color/ink_dim</item>
+    </style>
+</resources>

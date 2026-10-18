@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#FF070A12</color>
+    <color name="surface">#FF101826</color>
+    <color name="surface_variant">#FF1A2438</color>
+    <color name="ink">#FFE9EEFB</color>
+    <color name="ink_dim">#FF94A0BD</color>
+    <color name="ink_faint">#FF6A769B</color>
+    <color name="amber">#FFFFD166</color>
+    <color name="amber_deep">#FFFF9F43</color>
+    <color name="teal">#FF2FE3C0</color>
+    <color name="blue">#FF7CC4FF</color>
+    <color name="bad">#FFFF6B7D</color>
+    <color name="ok">#FF48D597</color>
+    <color name="btn_stroke">#40FFFFFF</color>
+    <color name="cell_off">#FF1B2540</color>
+    <color name="cell_off_stroke">#FF2A3A5F</color>
+    <color name="cell_on">#FFFFC24D</color>
+    <color name="cell_glow">#FFFFB858</color>
+    <color name="cell_core">#FFFFF3C4</color>
+    <color name="ink_on_primary">#FF08130F</color>
+</resources>

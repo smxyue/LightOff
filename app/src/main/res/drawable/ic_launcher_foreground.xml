@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 2x2 灯格：两亮两灭 -->
+    <path
+        android:fillColor="#FFD166"
+        android:pathData="M31,26 h14 a5,5 0 0 1 5,5 v14 a5,5 0 0 1 -5,5 h-14 a5,5 0 0 1 -5,-5 v-14 a5,5 0 0 1 5,-5 z" />
+    <path
+        android:fillColor="#243049"
+        android:pathData="M59,26 h14 a5,5 0 0 1 5,5 v14 a5,5 0 0 1 -5,5 h-14 a5,5 0 0 1 -5,-5 v-14 a5,5 0 0 1 5,-5 z" />
+    <path
+        android:fillColor="#243049"
+        android:pathData="M31,58 h14 a5,5 0 0 1 5,5 v14 a5,5 0 0 1 -5,5 h-14 a5,5 0 0 1 -5,-5 v-14 a5,5 0 0 1 5,-5 z" />
+    <path
+        android:fillColor="#FFD166"
+        android:pathData="M59,58 h14 a5,5 0 0 1 5,5 v14 a5,5 0 0 1 -5,5 h-14 a5,5 0 0 1 -5,-5 v-14 a5,5 0 0 1 5,-5 z" />
+</vector>

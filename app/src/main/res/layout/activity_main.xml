@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="18dp">
+
+        <!-- 标题栏 -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:subtitle="@string/tagline"
+            app:subtitleTextColor="@color/ink_faint"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/ink" />
+
+        <!-- 顶部统计 -->
+        <LinearLayout
+            android:id="@+id/statsRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                style="@style/StatCell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+                <TextView
+                    android:id="@+id/statTotalWins"
+                    style="@style/StatValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+                <TextView
+                    android:id="@+id/statTotalWinsLabel"
+                    style="@style/StatLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_total_wins" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/StatCell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+                <TextView
+                    android:id="@+id/statSizeWins"
+                    style="@style/StatValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+                <TextView
+                    android:id="@+id/statSizeWinsLabel"
+                    style="@style/StatLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_total_wins" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/StatCell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+                <TextView
+                    android:id="@+id/statSizePar"
+                    style="@style/StatValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="–" />
+                <TextView
+                    android:id="@+id/statSizeParLabel"
+                    style="@style/StatLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_round_par" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/StatCell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+                <TextView
+                    android:id="@+id/statSizeBest"
+                    style="@style/StatValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="–" />
+                <TextView
+                    android:id="@+id/statSizeBestLabel"
+                    style="@style/StatLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_total_wins" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 棋盘 -->
+        <com.sudisoft.lightoff.GameView
+            android:id="@+id/gameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp" />
+
+        <!-- 状态 chips -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:singleLine="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSize"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ink_dim"
+                app:chipBackgroundColor="@color/surface_variant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipLit"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ink_dim"
+                app:chipBackgroundColor="@color/surface_variant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSteps"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ink_dim"
+                app:chipBackgroundColor="@color/surface_variant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPar"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/teal"
+                app:chipBackgroundColor="@color/surface_variant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTime"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ink_dim"
+                app:chipBackgroundColor="@color/surface_variant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAssist"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_assist"
+                android:textColor="@color/amber"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/surface_variant" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- 主操作 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNew"
+                style="@style/WgtButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_new" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUndo"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_undo" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHint"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_hint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAuto"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_auto" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShuffle"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_shuffle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSound"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_sound_on" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditToggle"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_edit" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSettings"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="0dp"
+                android:text="@string/btn_settings" />
+        </LinearLayout>
+
+        <!-- 编辑模式操作 -->
+        <LinearLayout
+            android:id="@+id/editRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditorRandom"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_editor_random" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditorClear"
+                style="@style/WgtButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_editor_clear" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartCustom"
+                style="@style/WgtButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="0dp"
+                android:text="@string/btn_start_custom" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSolvable"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/chip_solvable"
+                android:textColor="@color/ok"
+                app:chipBackgroundColor="@color/surface_variant" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/explainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:lineSpacingMultiplier="1.4"
+            android:text="@string/explain"
+            android:textColor="@color/ink_faint"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/solvNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingMultiplier="1.4"
+            android:textColor="@color/ink_dim"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

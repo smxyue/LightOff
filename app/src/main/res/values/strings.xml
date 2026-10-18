@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">灭灯</string>
+    <string name="tagline">点击一格 → 该格与上下左右（不含对角）同时翻转 · 全部熄灭即获胜</string>
+
+    <!-- 顶部统计 -->
+    <string name="stat_total_wins">累计胜利</string>
+    <string name="stat_size_wins">%1$d×%1$d 胜利</string>
+    <string name="stat_round_par">本局最少步</string>
+    <string name="stat_size_best">%1$d×%1$d 最佳</string>
+    <string name="stat_best_steps">%1$d 步</string>
+
+    <!-- 状态 chips -->
+    <string name="chip_size">规模 %1$d×%1$d</string>
+    <string name="chip_lit">亮灯 %1$d</string>
+    <string name="chip_steps">步数 %1$d</string>
+    <string name="chip_par">最少 %1$s</string>
+    <string name="chip_time">用时 %1$s</string>
+    <string name="chip_assist">已用协助</string>
+    <string name="chip_solvable">布局可解 ✓</string>
+    <string name="chip_unsolvable">布局无解 ✗</string>
+
+    <!-- 主按钮 -->
+    <string name="btn_new">新游戏</string>
+    <string name="btn_undo">撤销</string>
+    <string name="btn_hint">提示</string>
+    <string name="btn_auto">自动求解</string>
+    <string name="btn_auto_stop">停止求解</string>
+    <string name="btn_shuffle">洗牌</string>
+    <string name="btn_sound_on">🔊</string>
+    <string name="btn_sound_off">🔇</string>
+    <string name="btn_edit">编辑棋盘</string>
+    <string name="btn_edit_exit">退出编辑</string>
+    <string name="btn_settings">设置与统计</string>
+    <string name="btn_editor_random">随机填充</string>
+    <string name="btn_editor_clear">全部熄灭</string>
+    <string name="btn_start_custom">开始挑战</string>
+
+    <!-- 提示与 toast -->
+    <string name="explain">每一格只需按 0 或 1 次（按两次等于没按），所以任何局面都存在「最少步数」最优解。棋盘规模 2–24 可自定义，自动求解速度 40ms–1s 可调，调慢可以看清每一步。</string>
+    <string name="toast_hint">提示：试试标出的格子</string>
+    <string name="toast_unsolvable">当前局面无解，可以「洗牌」或开一局新的</string>
+    <string name="toast_shuffled">已重新打乱（仍保证可解）</string>
+    <string name="toast_auto_stopped">已停止自动求解</string>
+    <string name="toast_game_over">本局已结束，先开一局新的</string>
+    <string name="toast_edit_mode">编辑模式：点击格子自由摆灯</string>
+    <string name="toast_custom_start">挑战开始！</string>
+    <string name="toast_custom_unsolvable">这个布局无解，换一种摆法</string>
+    <string name="toast_custom_cleared">棋盘已经是全灭状态，先点亮几盏</string>
+    <string name="toast_exported">已调起分享，可发送 CSV 战绩</string>
+    <string name="toast_cleared_size">已清除本规模记录</string>
+    <string name="toast_cleared_all">已清空全部记录</string>
+    <string name="toast_no_size_record">当前规模还没有记录</string>
+    <string name="toast_import_failed">文件解析失败：不是有效的记录备份</string>
+
+    <!-- 胜利弹窗 -->
+    <string name="win_title">🎉 全部熄灭！</string>
+    <string name="win_title_assisted">🛠️ 全部熄灭！（协助模式）</string>
+    <string name="win_again">再来一局</string>
+    <string name="win_look">看看棋盘</string>
+    <string name="win_line">用时 %1$s · 步数 %2$d%3$s%4$s%5$s</string>
+    <string name="win_par"> / 最少可以做到 %1$d 步</string>
+    <string name="win_perfect"> · 完美通关</string>
+    <string name="win_assisted"> · 使用过协助，不计入胜利</string>
+
+    <!-- 设置弹层 -->
+    <string name="sheet_title">对局设置</string>
+    <string name="sheet_size">棋盘规模 N（2–24）</string>
+    <string name="sheet_ratio">初始亮灯比例</string>
+    <string name="sheet_speed">自动求解速度</string>
+    <string name="sheet_speed_value">%1$dms/步</string>
+    <string name="sheet_count_target">把「初始亮灯比例」当目标（不足时自动微调以保证局面可解）</string>
+    <string name="sheet_stats_title">按规模统计</string>
+    <string name="sheet_export_csv">导出 CSV</string>
+    <string name="sheet_clear_size">清除本规模</string>
+    <string name="sheet_clear_all">清除全部</string>
+    <string name="sheet_clear_size_confirm">确定清除 %1$d×%1$d 的统计记录？</string>
+    <string name="sheet_clear_all_confirm">确定清除全部统计记录？此操作不可恢复</string>
+    <string name="sheet_stats_empty">还没有对局记录 —— 赢一局就会按规模记下来</string>
+    <string name="sheet_export_subject">灭灯战绩 CSV</string>
+    <string name="sheet_col_size">规模</string>
+    <string name="sheet_col_wins">胜利</string>
+    <string name="sheet_col_games">局数</string>
+    <string name="sheet_col_rate">胜率</string>
+    <string name="sheet_col_best">最少步</string>
+    <string name="sheet_col_fast">最快</string>
+    <string name="sheet_col_avg">均步</string>
+    <string name="sheet_footer_total">合计</string>
+
+    <!-- 生成说明 -->
+    <string name="solv_exact">已随机点亮 %1$d 格（目标 %2$d%%），数学上保证可解。%3$s</string>
+    <string name="solv_fix">目标 %1$d%% 的纯随机布局恰好无解，已微调至 %2$d 格，保证可解。%3$s</string>
+    <string name="solv_scramble">该规模下未找到精确比例的布局，已改用随机按键打乱生成（保证可解，当前 %1$d 格）。%2$s</string>
+    <string name="solv_custom">自定义布局 · 已保证可解。%1$s</string>
+    <string name="solv_par">最少 %1$d 步可以完成。</string>
+</resources>
